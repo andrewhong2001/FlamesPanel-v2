@@ -1,4 +1,7 @@
 # FlamesPanel-v2
 
-Installer instructions in a second...
+Installing FlamesPanel is simple - all you have to do id execute the following:
+
+    wget https://github.com/FlamesRunner/FlamesPanel-v2/blob/master/installers/installer.sh
+    sh installer.sh
 
