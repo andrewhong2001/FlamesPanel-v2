@@ -70,6 +70,14 @@ echo '</div>';
 die();
 }
 
+if (strlen($_POST['domain_name']) > 48){
+echo '<div class="alert alert-danger"><b>Error:</b> This domain exceeds the character limit of 48 characters. Please contact support.</div>';
+echo '</div></div></body><div class="container">';
+include('../../inc/footer.php');
+echo '</div>';
+die();
+}
+
 if ($tmpCheck == 0){
 echo '<div class="alert alert-danger"><b>Error:</b> This domain name is currently pending for setup.</div>';
 echo '<a href="." class="btn btn-info btn-lg">Back</a>';
