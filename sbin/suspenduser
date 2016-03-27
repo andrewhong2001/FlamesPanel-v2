@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+echo "Usage: /sbin/suspenduser username"
+else
+echo "Setting suspended flag..."
+echo "Suspended." > /home/$1/suspended.txt
+echo "Locking $1's password..."
+passwd -l $1
+echo "Terminating user processes..."
+killall -u $1
+echo "Locking VirtualHosts..."
+chmod 000 /home/$1/public_html
+chattr +i /home/$1/*/*
+chattr +i /home/$1/public_html
+echo "Suspended $1!"
+fi

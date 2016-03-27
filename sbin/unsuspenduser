@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+echo "Usage: /sbin/unsuspenduser username"
+else
+echo "Unlocking $1's password..."
+passwd -u $1
+echo "Unlocking VirtualHosts..."
+chattr -i /home/$1/*/*
+chattr -i /home/$1/public_html
+chmod 700 /home/$1/public_html
+echo "Removing suspended flag..."
+rm -rf /home/$1/suspended.txt
+echo "Unsuspended $1!"
+fi
