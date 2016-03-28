@@ -221,7 +221,18 @@ cat sudoers.new > /etc/sudoers
 passwd -l root
 
 clear
+sleep 3
+echo "Starting core FlamesPanel services..."
+
+echo "Starting Apache..."
+apachectl -k start
+echo "Applying changes to the SSH daemon..."
+service sshd restart
+echo "Reloading MySQL..."
+service mysqld restart
+echo "Success!"
 sleep 5
+clear
 echo "Cleaning up installation files..."
 rm -rf /tmp/FlamesPanel-v2
 sleep 3
