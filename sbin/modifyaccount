@@ -1,0 +1,43 @@
+#!/bin/bash
+
+case "$1" in
+
+modifyquota)
+
+if [ -z "$2" ]; then
+echo "A username is required."
+echo "Usage: /sbin/modifyaccount modifyquota username quotainmb inodelimit"
+else
+if [ -z "$3" ]; then
+echo "A new quota in megabytes is required."
+echo "Usage: /sbin/modifyaccount modifyquota username quotainmb inodelimit"
+else
+if [ -z "$4" ]; then
+echo "Please specify an inode limit."
+echo "Usage: /sbin/modifyaccount modifyquota username quotainmb inodelimit"
+else
+
+if [ ! -d "/home/$2" ];	then
+echo "Invalid username!"
+echo "Usage: /sbin/modifyaccount modifyquota username quotainmb inodelimit"
+else
+echo "Setting quota of '$3' megabytes on the user $1..."
+mbquota=$(($3 * 1000))
+setquota -u $2 --format=vfsv0 $mbquota $mbquota $4 $4 0 -a /dev/sda1
+echo "Success!"
+fi
+
+fi
+fi
+fi
+
+;;
+
+*)
+
+echo "Available actions:"
+echo "modifyquota - change the disk quota of an account"
+echo "Usage: /sbin/modifyaccount action parameters"
+exit 1
+
+esac
